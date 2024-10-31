@@ -1,0 +1,89 @@
+<html lang="no">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Speidernes landsleir 2025 - Intern kartløsning</title>
+
+  <script src="https://js.arcgis.com/calcite-components/2.13.0/calcite.esm.js" type="module"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/2.13.0/calcite.css" />
+  
+  <script src="https://js.arcgis.com/4.30/"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css" />
+
+  <script type="module" src="https://js.arcgis.com/map-components/4.30/arcgis-map-components.esm.js"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+
+  <calcite-shell content-behind>
+
+    <calcite-shell-panel id="shell-panel-nav" slot="panel-end" display-mode="float" height-scale="l">
+
+      <calcite-panel id="app-heading" hidden>
+        <calcite-icon id="logo-icon" slot="header-actions-start" icon="explore" text-label="explore"></calcite-icon>
+        <calcite-action-bar id="map-actions" slot="action-bar" layout="horizontal" expand-disabled>
+          <calcite-action icon="layers" text="Lagliste" data-action-id="layers"></calcite-action>
+          <calcite-action icon="basemap" text="Bakgrunnskart" data-action-id="basemaps"></calcite-action>
+          <calcite-action icon="legend" text="Tegnforklaring" data-action-id="legend"></calcite-action>
+          <calcite-action icon="bookmark" text="Bokmerker" data-action-id="bookmarks"></calcite-action>
+          <calcite-action icon="print" text="Utskrift" data-action-id="print"></calcite-action>
+          <calcite-action icon="information" text="Informasjon" data-action-id="information"></calcite-action>
+        </calcite-action-bar>
+      </calcite-panel>
+
+      <!-- Map-specific blocks containing ArcGIS Maps SDK for JavaScript components -->
+      <calcite-block open heading="Lagliste" data-block-id="layers" hidden>
+        <arcgis-layer-list reference-element="mapEl" visibility-appearance="checkbox"></arcgis-layer-list>
+      </calcite-block>
+      <calcite-block open heading="Bakgrunnskart" data-block-id="basemaps" hidden>
+        <arcgis-basemap-gallery reference-element="mapEl"></arcgis-basemap-gallery>
+      </calcite-block>
+      <calcite-block open heading="Tegnforklaring" data-block-id="legend" hidden>
+        <arcgis-legend legend-style="classic" reference-element="mapEl"></arcgis-legend>
+      </calcite-block>
+      <calcite-block open heading="Bokmerker" data-block-id="bookmarks" hidden>
+        <arcgis-bookmarks editing-enabled="false" reference-element="mapEl"></arcgis-bookmarks>
+      </calcite-block>
+      <calcite-block open heading="Utskrift" data-block-id="print" hidden>
+        <arcgis-print allowed-formats="all" allowed-layouts="all" include-default-templates="false"
+          reference-element="mapEl"></arcgis-print>
+      </calcite-block>
+
+      <!-- Info block (populates with info from the web map) -->
+      <calcite-block open heading="About the data" data-block-id="information" hidden>
+        <calcite-card id="card-content">
+          <img id="card-thumbnail" alt="Webmap thumbnail" slot="thumbnail" />
+          <div id="card-heading" slot="heading">
+            <!-- Dynamically populated -->
+          </div>
+          <div id="card-description" slot="description">
+            <!-- Dynamically populated -->
+          </div>
+          <div id="card-tags" slot="footer-end">
+            <!-- Dynamically populated -->
+          </div>
+        </calcite-card>
+      </calcite-block>
+
+    </calcite-shell-panel>
+
+    <arcgis-map id="mapEl" item-id="e3c9fe30edb04989b02f328680605211">
+
+      <arcgis-home position="top-left"></arcgis-home>
+      <arcgis-zoom position="top-left"></arcgis-zoom>
+      <arcgis-locate position="top-left" go-to-location-enabled="true" popup-enabled="false" scale="1000"></arcgis-locate>
+
+    </arcgis-map>
+
+  </calcite-shell>
+
+  <calcite-loader label="Loading" text="Loading..."></calcite-loader>
+
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
